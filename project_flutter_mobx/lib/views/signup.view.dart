@@ -51,21 +51,21 @@ class _SignupViewState extends State<SignupView> {
                       "Name",
                       TextInputType.text,
                       (value) {
-                        model.name = value;
+                        model.name = value!;
                       },
                     ),
                     _textFormField(
                       "E-mail",
                       TextInputType.emailAddress,
                       (value) {
-                        model.email = value;
+                        model.email = value!;
                       },
                     ),
                     _textFormField(
                       "Password",
                       TextInputType.visiblePassword,
                       (value) {
-                        model.password = value;
+                        model.password = value!;
                       },
                     ),
                     SizedBox(
@@ -79,10 +79,10 @@ class _SignupViewState extends State<SignupView> {
                               ),
                             ),
                           )
-                        : FlatButton(
+                        : TextButton(
                             onPressed: () {
-                              if (_formKey.currentState.validate()) {
-                                _formKey.currentState.save();
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
 
                                 _controller.create(model).then((data) {
                                   store.setUser(
@@ -100,9 +100,12 @@ class _SignupViewState extends State<SignupView> {
                                 });
                               }
                             },
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 30,
-                              vertical: 10,
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 30,
+                                vertical: 10,
+                              ),
+                              backgroundColor: Colors.white,
                             ),
                             child: Text(
                               "Sign Up",
@@ -112,7 +115,6 @@ class _SignupViewState extends State<SignupView> {
                                 fontFamily: "Arial",
                               ),
                             ),
-                            color: Colors.white,
                           ),
                   ],
                 ),
@@ -127,7 +129,7 @@ class _SignupViewState extends State<SignupView> {
   _textFormField(
     String labelText,
     TextInputType inputType,
-    Function(String) onSaved,
+    void Function(String?) onSaved,
   ) =>
       Padding(
         padding: EdgeInsets.symmetric(vertical: 10),
@@ -149,7 +151,7 @@ class _SignupViewState extends State<SignupView> {
             color: Colors.white,
           ),
           validator: (value) {
-            if (value.isEmpty) {
+            if (value!.isEmpty) {
               return "Please, type your $labelText.";
             }
             return null;

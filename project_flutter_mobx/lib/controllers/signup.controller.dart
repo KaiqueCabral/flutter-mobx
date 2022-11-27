@@ -3,7 +3,7 @@ import 'package:project_flutter_mobx/repositories/account.repository.dart';
 import 'package:project_flutter_mobx/view-models/signup.viewmodel.dart';
 
 class SignupController {
-  AccountRepository repository;
+  late AccountRepository repository;
 
   SignupController() {
     repository = new AccountRepository();
